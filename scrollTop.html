@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+    	body{height:2000px;}
+    	#pic{
+    		border:1px solid black;
+    		width: 200px;
+    		position: absolute;
+    		height: 100px;
+    		right:0px;
+    		bottom: 0px;
+    	}
+    </style>
+</head>
+<body >
+	<div id="pic">
+	</div>
+    <script language="JavaScript">
+    	window.onscroll =  function(){//屏幕滚动事件
+	        let pic = document.querySelector("#pic");
+	        let Top = document.documentElement.scrollTop || document.body.scrollTop;//兼容写法
+	        pic.style.top =  document.documentElement.clientHeight - pic.offsetHeight + Top + "px";//动态获取高度并赋值
+        }
+    </script>
+</body>
+</html>
