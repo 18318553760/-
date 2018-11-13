@@ -1,0 +1,46 @@
+<html>
+<title>js_7</title>
+<body>
+    <input type="month" id="datepicker">
+    <select id="select">
+    </select>
+    <script>
+     let selector = document.querySelector("#select");
+
+     let appendOption = function(parent,value){
+         let option = document.createElement("option");
+         option.value = value;
+         option.innerText = value + "日";
+         parent.appendChild(option);
+     }
+
+     let datepicker = document.querySelector("#datepicker");
+     datepicker.addEventListener("change",function(){
+         let arr = datepicker.value.split("-");
+         let month = parseInt(arr[1]);
+         let year = parseInt(arr[0]);
+
+         if(month === 4 || month === 6 || month === 9 || month === 11 ){
+             for(let j = 1; j <= 30; j++){
+                 appendOption(selector,j);
+             }
+         }else if(month === 2){
+             if(year % 4 === 0 || year % 400 === 0 && year % 100 !== 0){
+                 for(let j = 1; j <= 29; j++){
+                     appendOption(selector,j);
+                 }
+             }else{
+                 for(let j = 1; j <= 28; j++){
+                     appendOption(selector,j);
+                 }
+             }
+         }else{
+             for(let j = 1; j <= 31; j++){
+                     appendOption(selector,j);
+                 }
+         }
+     })
+     
+    </script>
+</body>
+</html>
