@@ -1,0 +1,99 @@
+<html>
+<title>file</title>
+<head>
+<style>
+    input{
+        width:200px;
+        height:20px;
+    }
+</style>
+<script src="./jquery-3.3.1.min.js">
+</script>
+</head>
+<body>
+    <a style="pointer-events:none;" href="./handle.php">alp</a>
+<form action="./handle.php" method="post" id="lapForm">
+    name:<input name="name" />
+    age:<input  name="age"/>
+    file1:<input type="file" name="file" id="file1"/>
+    file2:<input type="file" name="file2" id ="file2"/>
+    submit:<input type="submit">
+</form>
+
+<button id="clickMe">Click Me!</button>
+
+<script>
+const APP = {};
+APP.elements = {};
+APP.events = {};
+APP.dataStore = [{name:"alp"},{age:21}];
+
+//elements
+APP.elements.lapForm = document.querySelector("#lapForm");
+APP.elements.file = document.querySelector("#file");
+APP.elements.clickMe = document.querySelector("#clickMe");
+
+//events
+APP.events.clickMe1 = function(){console.log(1);};
+APP.events.clickMe2 = function(){console.log(2);APP.elements.clickMe.removeEventListener("click",APP.events.clickMe1);};
+// APP.events.clickMe3 = function(){console.log(3);};
+
+APP.elements.clickMe.addEventListener("click",APP.events.clickMe1);
+APP.elements.clickMe.addEventListener("click",APP.events.clickMe2);
+// APP.elements.clickMe.removeEventListener("click",APP.events.clickMe1);
+
+APP.elements.lapForm.addEventListener("submit",function(ev){
+    let data = new FormData(APP.elements.lapForm);
+    $.ajax({
+    url: './handle.php',
+    type: 'POST',
+    cache: false,
+    data: data,
+    processData: false,
+    contentType: false
+    }).done(function(res) {
+        console.log("success",res);
+    }).fail(function(res) {
+        console.log('fail',res);
+    });
+    ev.preventDefault();
+});
+
+</script>
+</body>
+</html>
+<!-- 
+var input  = document.getElementById("file");   // input file
+input.onchange = function(){
+    var file = this.files[0];
+        if(!!file){
+            var reader = new FileReader();
+            reader.readAsArrayBuffer(file);
+            reader.onload = function(){
+                var binary = this.result;
+                upload(binary);
+        }
+    }
+}
+
+//文件上传
+function upload(binary){
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://xxxx/opload");
+    xhr.overrideMimeType("application/octet-stream");
+    //直接发送二进制数据
+    if(xhr.sendAsBinary){
+        xhr.sendAsBinary(binary);
+    }else{
+        xhr.send(binary);
+    }
+    
+    // 监听变化
+    xhr.onreadystatechange = function(e){
+        if(xhr.readyState===4){
+            if(xhr.status===200){
+                // 响应成功       
+            }
+        }
+    }
+} -->
