@@ -1,0 +1,31 @@
+<head>
+  <meta charset="UTF-8">
+</head>
+<form onsubmit="return false;">
+  <input type="hidden" name="file_base64" id="file_base64">
+  <input type="file" id="fileup">
+  <input type="submit" value="submit" onclick="$.post('./handleOne.php', $(this).parent().serialize());">
+</form>
+<script src="./base64.min.js"></script>
+<script src="./jquery-3.3.1.min.js"></script>
+<script>
+
+$(document).ready(function(){
+  $("#fileup").change(function(){
+    var v = $(this).val();
+
+    var reader = new FileReader();
+    console.log("files[0]",this.files[0]);
+    reader.readAsDataURL(this.files[0]);
+
+    reader.onload = function(e){
+      console.log("reader:",e.target.result);
+      $('#file_base64').val(e.target.result);
+    };
+    
+  });
+});
+
+
+
+</script>
