@@ -1,31 +1,49 @@
+<html>
 <head>
   <meta charset="UTF-8">
 </head>
-<form onsubmit="return false;">
-  <input type="hidden" name="file_base64" id="file_base64">
-  <input type="file" id="fileup">
-  <input type="submit" value="submit" onclick="$.post('./handleOne.php', $(this).parent().serialize());">
+<form id="lapForm">
+  age:<input name="age">
+  file:<input type="file" name="file" id="fileUp">
+  <button>Submit</button>
 </form>
 <script src="./base64.min.js"></script>
 <script src="./jquery-3.3.1.min.js"></script>
 <script>
+const APP = {};
+APP.elements = {};
+APP.events = {};
 
-$(document).ready(function(){
-  $("#fileup").change(function(){
-    var v = $(this).val();
+APP.elements.lapForm = document.querySelector("#lapForm");
+APP.elements.fileUp = document.querySelector("#fileUp");
 
-    var reader = new FileReader();
-    console.log("files[0]",this.files[0]);
-    reader.readAsDataURL(this.files[0]);
-
-    reader.onload = function(e){
-      console.log("reader:",e.target.result);
-      $('#file_base64').val(e.target.result);
+APP.elements.lapFormOnSubmit = function(ev){
+  let formData = new FormData(APP.elements.lapForm);
+  let reader = new FileReader();
+  reader.readAsDataURL(formData.get("file"));
+  reader.onload = function(e){
+      let handleData = Base64.encode(e.target.result);
+      let arr = [];
+      arr.push(handleData);
+      let file = new Blob(arr);
+      
+      let newFile = new File([file],formData.get("file").name);
+      console.log(formData.get("file"));
+      formData.set("file",newFile);
+      console.log(formData.get("file"));
+      $.ajax({
+          url: './handleOne.php',
+          type: 'POST',
+          cache: false,
+          data: formData,
+          processData: false,
+          contentType: false
+          })
     };
-    
-  });
-});
+  ev.preventDefault();
+}
 
-
+APP.elements.lapForm.addEventListener("submit",APP.elements.lapFormOnSubmit);
 
 </script>
+</html>
