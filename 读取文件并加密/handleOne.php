@@ -1,6 +1,6 @@
 <?php
 // var_dump($_POST);
-// var_dump($_FILES);
+var_dump($_FILES);
 
 $data = file_get_contents($_FILES["file"]["tmp_name"]);
 
