@@ -13,7 +13,7 @@ a{text-decoration:none;outline:none;blr:expression(this.onFocus=this.blur());}
 .ce li .dqian{background:none}
 .ce li .xz{}
 
-.er{display:none;width:150px;background:rgb(255,255,255);}
+.er{display:none;width:150px;background:rgb(255,255,255);}/*display:none;默认不展开子目录*/
 .er li{width:100%;border:solid rgb(140,140,140);border-width:1px 0px 0px;}
 .er li a{display:block;padding:10px 10px 10px 20px;color:#1892d1;background:none;font-size: 15px;}
 .er li a:hover{background-color: rgb(240,240,240);}
@@ -21,7 +21,7 @@ a{text-decoration:none;outline:none;blr:expression(this.onFocus=this.blur());}
 .er li .sen_x{background:rgb(255,255,255);}
 .er .e_li a:hover,.er .e_li .sen_x{background:url(../images/more.png) no-repeat 120px center rgb(255,255,255);}
 
-.thr{background:rgb(150,150,150);display:none;}
+.thr{background:rgb(150,150,150);display:none;}/*display:none;默认不展开子目录*/
 .thr li{margin-bottom:1px;border-top: 1px solid rgb(180,180,180);position:relative;}
 .er .e_li .thr li a{background:none;}
 .er .e_li .thr li a:hover{background:rgb(249,152,49);}
