@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>editor</title>
+    <style type="text/css">
+    h4{ font-weight: bold !important;
+            color:#66befe;
+        }
+    h4::before{
+        content: "🔵";
+    }
+    .titleEmail{
+        width:80%;
+        height: 34px;
+        line-height: 34px;
+        font-size: 18px;
+        vertical-align:top;
+        border:1px rgb(150,150,150) solid;
+    }
+    #chooseExpert{
+        /*margin-top: 20px;*/
+    }
+    ul[role="menu"]{
+        margin-top: 0px !important;
+        min-width: 100px;
+        min-height: 100px;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+    .zIndex{
+        z-index: 100000 !important;
+    }
+    .containerEditor{
+        margin-top:30px;
+    }
+    .send{
+        margin-top: 30px;
+        text-align: center;
+    }
+    </style>
+</head>
+<body>
+<h4>邀请专家</h4>
+    <div style="display: flex;justify-content: center;">
+        <div align="left">
+            <div class="btn-group">
+                <button type="button" class="btn btn-success dropdown-toggle" id="chooseExpert"> 选择专家 <span class="caret"></span>
+                </button>
+                <ul class="zIndex dropdown-menu" role="menu">
+                    <li><input type="checkbox" id="allSelected">全选</li>
+                    <volist name="data" id="vo">
+                        <li><input type="checkbox" name="{$vo.id}" expertname="{$vo.name}">{$vo.name}</li>
+                    </volist>
+                </ul>
+            </div>
+        </div>
+        <p class="titleEmail"></p>
+    </div>
+    <div align="center" class="containerEditor">
+        <textarea id="LAPEditor" name="content">
+        </textarea>
+    </div>
+    <p class="send"><button id="submit" class="btn btn-primary"> 发 送 </button></p>
+
+    <script type="text/javascript" src="./ueditor.config.js"></script>
+    <script type="text/javascript" src="./ueditor.all.min.js"></script>
+    <script type="text/javascript">
+        let editor = new UE.ui.Editor(); 
+        editor.render("LAPEditor");
+
+        let APP = {};
+        APP.namespace = function(nameSpace_string){  
+            let parts = nameSpace_string.split('.');
+            let parent = APP;
+            if(parts[0] === "APP"){
+                parts = parts.slice(1);
+            }
+            for(let i = 0, length = parts.length; i < length; i++ ){
+                if(typeof parent[parts[i]] === "undefined"){
+                    parent[parts[i]] = {};
+                }
+                parent = parent[parts[i]];
+            }
+            return parent;
+        }
+
+        APP.namespace("APP.values");
+        APP.namespace("APP.events"); 
+        APP.namespace("APP.elements");
+        
+        APP.elements.showExperts = document.querySelector("ul[role='menu']"); //下拉专家菜单
+        APP.elements.containerExperts = document.querySelector("div[class='btn-group']");
+        APP.elements.allSelected = document.querySelector("#allSelected"); //全选功能的checkbox
+        APP.elements.experts = document.querySelectorAll("input[name]"); //所有专家
+        APP.elements.LAPEditor = document.querySelector("#LAPEditor");
+        APP.elements.submit = document.querySelector("#submit"); //发送按钮
+        APP.elements.titleEmail = document.querySelector("p[class='titleEmail']"); //选择的专家在标题栏显示
+
+        APP.events.containerExpertsMouseover = function(){ //移入选择专家按钮
+                APP.elements.showExperts.style.display = "block";
+        }
+
+        APP.events.containerExpertsMouseout = function(){ //移出选择专家按钮
+            APP.elements.showExperts.style.display = '';
+            let expertsNames = [];
+            let Expertsselected = document.querySelectorAll("input[selected='checked']");
+            for(let i = 0, length = Expertsselected.length; i < length; i++){
+                expertsNames.push(Expertsselected[i].getAttribute("expertname"));
+                // console.log(Expertsselected[i].getAttribute("expertname"));
+            }
+            // console.log(expertsNames);
+            let namesString = expertsNames.join(",");
+            APP.elements.titleEmail.innerHTML = namesString;
+        }
+
+        APP.events.allSelectedClick = function(){ //全选checkbox
+            for(let i = 0,length = APP.elements.experts.length; i < length; i++){
+                let status = APP.elements.allSelected.parentNode.className;
+                status = status?"":"checked"; //将状态取反
+                if(status){
+                    APP.elements.experts[i].setAttribute("selected","checked");
+                    APP.elements.experts[i].parentNode.setAttribute("class",status);
+                }else{
+                    APP.elements.experts[i].removeAttribute("selected");
+                    APP.elements.experts[i].parentNode.removeAttribute("class");
+                }
+                
+            }
+        }
+
+            for(let i = 0, length = APP.elements.experts.length; i < length; i++){
+                APP.elements.experts[i].onclick = function(){
+                    let status = APP.elements.experts[i].parentNode.className;
+                    status = status ? "" : "checked";
+                    if(status){
+                        APP.elements.experts[i].setAttribute("selected","checked");
+                        APP.elements.experts[i].parentNode.setAttribute("class","checked");
+                    }else{
+                        APP.elements.experts[i].removeAttribute("selected");
+                        APP.elements.experts[i].parentNode.removeAttribute("class");
+                    }
+                        
+                }
+            }
+        APP.events.titleEmailClick = function(){
+            alert("请选择专家!");
+        }
+        APP.events.submitClick = function(){
+            let expertsIds = [];
+            let Expertsselected = document.querySelectorAll("input[selected='checked']");
+            for(let i = 0, length = Expertsselected.length; i < length; i++){
+                expertsIds.push(Expertsselected[i].name);
+            }
+            console.log(expertsIds);
+            let Content = editor.getContent();
+            // $.ajax({
+            //     type:"POST",
+            //     url:"{:U('Check/Index/ajax_invite')}",
+            //     data:{  "content":Content,
+            //             "users":expertsIds
+            //         },
+            //     error:function(e){
+            //         if(e){
+            //             alert("添加失败，请稍后再试");
+            //         }  
+            //     },
+            //     success:function(data){
+            //         console.log(data);
+            //         // if(data){
+            //         //     alert("添加成功");
+            //         //     window.location.href = '';
+            //         // }
+            //     }
+            // })
+        }
+
+        APP.elements.containerExperts.addEventListener("mouseenter",APP.events.containerExpertsMouseover);
+        APP.elements.containerExperts.addEventListener("mouseleave",APP.events.containerExpertsMouseout);
+        APP.elements.allSelected.addEventListener("click",APP.events.allSelectedClick);
+        APP.elements.titleEmail.addEventListener("click",APP.events.titleEmailClick);
+        APP.elements.submit.addEventListener('click',APP.events.submitClick);
+
+    </script>
+
+</body>
+</html>
+    
+
