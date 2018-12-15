@@ -26,7 +26,7 @@
         	width:174px;
         	height: 26px;
         }
-		.fin{
+		.box{
 		    display: flex;
 		    width: 245px;
 		    height: 30px;
@@ -36,14 +36,14 @@
 		    margin-top:10px;
 		    justify-content: space-around;
 		}
-		.leftwidth{
+		.left{
 			margin-right: 8px;
 		    min-width: 50px;
 		    height: 30px;
 		    line-height: 30px;
 		    text-align: left;
 		}
-		.rightwidth{
+		.right{
 			width: 200px;
 			height:30px; 
 			text-align: left;
@@ -62,41 +62,41 @@
                 </div>
                 <div class="modal-body" >
                     <form action="" class="form-type" method="" enctype="multipart/form-data" id="lapForm">
-                            <div class="fin">
-                            	<div class="leftwidth">text：</div>
-                            	<div class="rightwidth">
+                            <div class="box">
+                            	<div class="left">text：</div>
+                            	<div class="right">
                             	    <input required="required" placeholder=请输入text type="text">
                             	</div>
                             </div>
-                            <div class="fin">
-                            	<div class="leftwidth">date：</div>
-                            	<div class="rightwidth">
+                            <div class="box">
+                            	<div class="left">date：</div>
+                            	<div class="right">
                                     <input required="required" type="date">
                                 </div>
                             </div>
-                            <div class="fin">
-                            	<div class="leftwidth">num：</div>
-                                <div class="rightwidth">               
+                            <div class="box">
+                            	<div class="left">num：</div>
+                                <div class="right">               
                             	    <input required="required" placeholder="请输入数字" type="number">
                                 </div>
                             </div>
-                                <div class="fin">
-                                    <div class="leftwidth">select:</div>
-                                    <div class="rightwidth">
+                                <div class="box">
+                                    <div class="left">select:</div>
+                                    <div class="right">
 		                                <select>;
 		                                    <option>select</option>';
 		                                </select>
                                     </div>
                                 </div>
-                                    <div class="fin">
-                                    	<div class="leftwidth" style="padding-left: 8px;">file:</div>
-                                    	<div class="rightwidth">
+                                    <div class="box">
+                                    	<div class="left" style="padding-left: 8px;">file:</div>
+                                    	<div class="right">
                                     	    <input type="file" name="file">
                                     	</div>
                                     </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                            <button type="button" class="btn btn-primary" id="submitchange">添加信息</button>
+                            <button type="button" class="btn btn-primary">添加信息</button>
                         </div>
                     </form>
                 </div>
