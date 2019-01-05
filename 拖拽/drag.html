@@ -5,15 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 <style>
-#drogbox1{
-    display: inline-block;
-    width:200px;
-    height:200px;
-    border:1px silver solid;
-    line-height: 200px;
-    text-align: center;
-}
-#drogbox2{
+#drogbox1,#drogbox2{
     display: inline-block;
     width:200px;
     height:200px;
@@ -39,7 +31,8 @@
         }
         APP.events.drogboxOndrop = (ev)=>{
             ev.preventDefault();
-            var data=ev.dataTransfer.getData("Text");
+            var data = ev.dataTransfer.getData("Text");
+            console.log(ev.dataTransfer.files);
             ev.target.appendChild(document.getElementById(data));
         }
         APP.events.allowDrop = (ev)=>{
