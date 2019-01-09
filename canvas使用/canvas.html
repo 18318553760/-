@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        let DomContentLoaded = ()=>{
+            const APP = {};
+
+            APP.elements = {};
+            APP.events = {};
+            APP.values = {};
+
+            APP.elements.canvas1 = document.querySelector("#canvas1");
+            console.log(APP.elements.canvas1);
+            // APP.values.gd = APP.elements.canvas1.getContext("2d");
+
+            console.log(1);
+
+        }
+        document.addEventListener('DOMContentLoaded',DomContentLoaded);
+    </script>
+</head>
+<body>
+    <canvas id="#canvas1" width="200" height="200">不支持canvas</canvas>
+</body>
+</html>

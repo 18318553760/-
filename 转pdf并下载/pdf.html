@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js" integrity="sha384-THVO/sM0mFD9h7dfSndI6TS0PgAGavwKvB5hAxRRvc0o9cPLohB0wb/PTA7LdUHs" crossorigin="anonymous"></script>
+</head>
+<body>
+	<button class="downloadPDF">
+		点击下载
+	</button>
+	<div id="main">
+		<p>1</p>
+		<p>2</p>
+		<p>3</p>
+		<p>4</p>
+		<p>5</p>
+	</div>
+	<script type="text/javascript">
+		const APP = {};
+
+		APP.elements = {};
+		APP.events = {};
+		APP.fns = {};
+
+		APP.elements.downloadPDF = document.querySelector(".downloadPDF");
+
+		APP.fns.printbypage = (pdf, k)=>{
+			let options = {
+	        	background: '#FFFFFF'
+	        };
+	        pdf.addHTML(document.querySelectorAll[k], options,
+	        function() {
+	        if (k < document.querySelector('#main').length - 1) {
+	            pdf.addPage();
+	            printbypage(pdf, k + 1);
+	        } else {
+	            pdf.save("统计报表.pdf");
+	        }
+	        });
+		}
+
+		APP.events.downloadPDF = ()=>{
+			let pdf = new jsPDF('p', 'pt', 'a2');
+	        APP.fns.printbypage(pdf, 0);
+		}
+
+		APP.elements.downloadPDF.addEventListener('click',APP.events.downloadPDF);
+	</script>
+</body>
+</html>
