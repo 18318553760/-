@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        canvas{
+            border:1px silver solid;
+            margin: 0 auto;
+        }
+    </style>
+    <script>
+            const APP = {};
+            
+            APP.elements = {};
+            APP.events = {};
+            APP.values = {};
+    
+            let DomContentLoaded = ()=>{
+                APP.elements.canvas2 = document.querySelector("#canvas2");
+    
+                let gd2 = APP.elements.canvas2.getContext("2d");    
+    
+                gd2.lineWidth = 1;
+    
+                // gd2.moveTo(100,100);
+                // gd2.lineTo(300,100);
+                // gd2.lineTo(300,100);
+                
+                //路径
+                gd2.rect(0,0,300,200);
+                gd2.stroke();    
+
+
+
+            }
+            document.addEventListener('DOMContentLoaded',DomContentLoaded);
+            </script>
+</head>
+<body>
+        <canvas id="canvas2" width="500" height="500"></canvas>
+</body>
+</html>

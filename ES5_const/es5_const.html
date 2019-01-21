@@ -8,12 +8,14 @@
 </head>
 <body>
     <script>
-        var _const = (variable,value)=>{
+        function consts(variable,value){
             Object.defineProperty(window,variable,{
                 get:()=>{return value},
-                set:(variable)=>{
-                    if(variable !== value){
-                        throw new TypeError('Assignment to const variable.');
+                set:(anotherVariable)=>{
+                    console.log(`anotherVariable:${anotherVariable};value:${value}`);
+                    if(anotherVariable !== value){
+                        // throw new TypeError(`${variable} is already assignmented.`);
+                        console.error(`${variable} is already assignmented.`);
                     }else{
                         return value;
                     }
@@ -22,10 +24,17 @@
                 enumerable:false,
             });
         }
-        _const('a',5);
-        console.log(a);
-        a=12;
-        console.log(a);
+        // _const('a',5);
+        // console.log(a);
+        // a = 6;
+
+        let test = ()=>{
+            const Happy = "happy";
+            consts("LAPFUTURE","JS&GF");         
+        }
+        test();
+        console.log(LAPFUTURE);
+        console.log(Happy);
     </script>
 </body>
 </html>
