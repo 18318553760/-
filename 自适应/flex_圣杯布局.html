@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    body{
+        margin:0px;
+    }
+    #header,#footer{
+        background: rgba(29, 27, 27, 0.726);
+        text-align: center;
+        height: 60px;
+        line-height: 60px;
+    }
+    #container{
+        display: flex;
+    }
+    .column{
+        text-align: center;
+        height: 100%;
+        line-height: 300px;
+    }
+    #left{
+        width: 200px;        
+        background: rgba(95, 179, 235, 0.972);
+    }
+    #center{
+        flex-grow: 1;
+        background: rgb(206, 201, 201);
+    }
+    #right{
+        width: 150px;           
+        background: rgb(231, 105, 2);
+    }
+    
+    </style>
+</head>
+<body>
+        <div id="header">#header</div>
+        <div id="container">
+          <div id="left" class="column">#left</div>
+          <div id="center" class="column">#center</div>
+          <div id="right" class="column">#right</div>
+        </div>
+        <div id="footer">#footer</div>
+        <div style="display: flex;
+                    height: 300px;
+                    border: 1px solid black;
+                    align-items: center">
+            <p style="background-color:red;">1</p>
+        </div>
+</body>
+</html>
