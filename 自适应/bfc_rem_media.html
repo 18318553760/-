@@ -74,10 +74,28 @@
         }
     </div>
     <div class="main">
+        <code>
+            <b>
         .main{
             height: 100%;
             overflow: hidden;
         }
+    </b>
+    </code>
+    <pre>
+            .right{
+                float: right;
+                height: 100%;
+                background-color: aquamarine
+            }
+            </pre>
     </div>
+    <script>
+    let main = document.querySelector(".main");
+    console.log( window.getComputedStyle(main).getPropertyValue("top"));
+    // window.getComputedStyle(main).setProperty('top','10px');
+    main.style.top = '10px';
+    console.log( window.getComputedStyle(main).getPropertyValue("top"));
+    </script>
 </body>
 </html>
