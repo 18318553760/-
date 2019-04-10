@@ -28,6 +28,7 @@
 
         APP.events.thingOndragstart = (ev)=>{
             ev.dataTransfer.setData("Text",ev.target.id);
+            console.log(ev.dataTransfer);
         }
         APP.events.drogboxOndrop = (ev)=>{
             ev.preventDefault();
