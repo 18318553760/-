@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button class="fetch">FETCH</button>
+    <script>
+        let fetchButton = document.querySelector(".fetch");
+        let clickFetch = async ()=>{
+            let response = await fetch("http://localhost:8011/api/info/getInfo");
+            console.log("response:",response);
+            let data = await response.json();
+            console.log("data:",data);
+            console.log(123);
+        };
+        fetchButton.addEventListener('click',clickFetch);
+    </script>
+</body>
+</html>
